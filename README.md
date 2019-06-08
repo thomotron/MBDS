@@ -1,6 +1,8 @@
 # MBDS - Modular Bomb Defusal Simulator
-A singleplayer web-based take on the popular game Keep Talking and Nobody Explodes that I made as my Year 12 high school IT project.  
-Check it out [here](https://bomb.tem.party)
+<img src="https://i.imgur.com/2YdGMV0.png"></img>
+
+A singleplayer web-based take on the popular game Keep Talking and Nobody Explodes.  
+Made as my Year 12 high school IT project. Check it out [here](https://bomb.tem.party).
 
 ## Defusal Instructions
 If you're new to MBDS I would recommend starting out on an easier difficulty. As the difficulty ramps up, you get less time to defuse which makes it rather hard to read the manual.  

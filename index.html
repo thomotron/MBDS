@@ -1,0 +1,238 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>MBDS - Modular Bomb Defusal Simulator</title>
+<link href="stylesheets/default.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<script src="js/lib/jq/jquery-2.2.3.min.js"></script>
+<script src="js/lib/jqui/jquery-ui.min.js"></script>
+<script src="js/cookie.js"></script>
+<script src="js/modules.js"></script>
+<script src="js/methods.js"></script>
+<script src="js/bombgame.js"></script>
+</head>
+
+<body>
+<div class="explosionOverlay invisible"></div>
+<div class="cookieWarning">
+  <p>
+  This game uses cookies to store leaderboard data.
+  Please enable cookies in your browser for the best experience.
+  </p>
+  <button type="button" class="closeButton">&times;</button>
+</div>
+<div class="menu">
+<div class="settings">
+  <div class="settingsGear" onclick="toggleSettings();"></div>
+  <div class="settingsMenu">
+    <div class="noselect" onclick="resetScores();">Clear scores</div>
+  </div>
+</div>
+	<!-- Leave the h1 as-is, text determined by menu caller -->
+  <h1>Game Setup</h1>
+  <div align="center">
+
+    <div class="breaker"></div>
+
+    <h3>Leaderboard</h3>
+    <div class="leaderboardContainer">
+    <table style="border-bottom:thin solid #000000;height:20px;margin-left:10px;margin-right:10px;">
+      <tr>
+        <th width="40%">Username</th>
+        <th width="30%">Difficulty</th>
+        <th width="30%">Score</th>
+      </tr>
+    </table>
+    <div class="leaderboard">
+
+    </div>
+    </div>
+
+    <div class="breaker"></div>
+
+    <h3>Game Settings</h3>
+    <label style="line-height: 37px; font-size: 16px;">Name:</label>
+    <input id="username" class="input" placeholder="e.g. Mark" autofocus>
+    <label style="line-height: 37px; font-size: 16px;">Difficulty:</label>
+    <label>
+      <select name="difficulty" id="difficulty" class="input">
+        <option value="150">Beginner</option>
+        <option value="120">Easy</option>
+        <option value="90" selected>Normal</option>
+        <option value="60">Hard</option>
+        <option value="30">Expert</option>
+      </select>
+    </label>
+
+    <button type="button" id="submit" class="input">Begin</button>
+
+  </div>
+</div>
+<div class="manualContainer">
+  <div class="manual">
+    <div class="page" id="page1">
+      <h1>Bomb Defusal<br>Manual</h1>
+      <h4>For <em>those</em> situations</h4>
+    </div>
+    <div class="page" id="page2">
+      <h1>Wires</h1>
+      <em>Exposed and ready to cut, wires are the basis for any mediocre time bomb.</em>
+      <hr>
+      <ul>
+      	<li>Wire modules have 4 coloured wires</li>
+      	<li>Only <u>one</u> correctly cut wire will disarm the module</li>
+      	<li>Wires are ordered first to last, top to bottom</li>
+      </ul>
+      <ol>
+      	<li>If there are no red wires and exactly one black wire, cut the second wire</li>
+      	<li>Otherwise, if the last wire is white, cut the last wire</li>
+      	<li>Otherwise, if there is more than one blue wire, cut the last blue wire</li>
+      	<li>Otherwise, if there is exactly one blue wire, cut the first wire</li>
+      	<li>Otherwise, if there is more than one yellow wire, cut the last wire</li>
+      	<li>Otherwise, if there is exactly one red wire and there is more than one orange wire, cut the red wire</li>
+      	<li>Otherwise, if there are no black wires and no green wires, cut the third wire</li>
+      	<li>Otherwise, cut the second wire</li>
+      </ol>
+    </div>
+    <div class="page" id="page3">
+    	<h1>The Button</h1>
+      <em>You sure you want to press that?</em>
+    	<hr>
+      <p>Follow the below rules in the order that they appear.</p>
+    	<ol>
+    		<li>If the button is red and says "Hold", press and immediately release the button.</li>
+    		<li>Otherwise, if the button says "Reset", press and immediately release the button.</li>
+    		<li>Otherwise, press and hold the button until the indicator lights up, then release the button and refer to "Coloured Indicators"</li>
+    	</ol>
+      <h3>Coloured Indicators</h3>
+      <ol>
+      	<li>If the indicator is orange, press and hold the button until the timer has a three in any position.</li>
+      	<li>If the indicator is purple, press and hold the button until the timer has a six in any position.</li>
+      	<li>If the indicator is blue, press and immediately release the button.</li>
+      	<li>If the indicator is any other colour, press and hold the button until the timer has a one in any position.</li>
+      </ol>
+    </div>
+    <div class="page" id="page4">
+    	<h1>Binary</h1>
+      <em>Two strikes, 256 different combinations, and virtually no time to complete.</em>
+      <hr>
+    	<ul>
+    		<li>Follow the below rules in order.</li>
+    		<li>The top row of buttons represent one.</li>
+    		<li>The bottom row of buttons represent zero.</li>
+    		<li>Press the enter button only when <u>all eight</u> values have been entered.</li>
+    	</ul>
+    	<ol>
+    		<li>If a number between 1 and 25 is displayed, enter '00001001'.</li>
+    		<li>Otherwise, if a number between 26 and 37 is displayed, enter '01101111'.</li>
+    		<li>Otherwise, if a number between 34 and 51 is displayed, enter '01101110'.</li>
+    		<li>Otherwise, if a number between 67 and 86 is displayed, enter '01000101'.</li>
+    		<li>Otherwise, if 87 is displayed, enter '01010100'.</li>
+    		<li>Otherwise, if a number between 13 and 71 is displayed, enter '01010111'.</li>
+    		<li>Otherwise, if a number between 87 and 100 is displayed, enter '11001110'.</li>
+    	</ol>
+    </div>
+  </div>
+  <!-- EMMET String: div.page#page$>h1+hr+em+ul>li*4^ol>li*8 -->
+	<div class="pulltab">
+    <div class="vertBar"></div>
+    <div class="vertBar"></div>
+    <div class="vertBar"></div>
+  </div>
+</div>
+<div class="cenContainer">
+  <div class="bombCase">
+    <div class="module" id="mod1">
+    	<div class="timer-display"></div>
+      <div class="timer-strikes"></div>
+      <div class="timer-buzzer"></div>
+    </div>
+    <div class="module" id="mod2">
+    </div>
+    <div class="module" id="mod3"></div>
+    <div class="module" id="mod4"></div>
+  </div>
+</div>
+<br/>
+
+<!-- Preload images -- A LOT of images -->
+<div class="preload">
+	<img src="img/wires/1r.png" alt="">
+	<img src="img/wires/1o.png" alt="">
+	<img src="img/wires/1y.png" alt="">
+	<img src="img/wires/1g.png" alt="">
+	<img src="img/wires/1b.png" alt="">
+	<img src="img/wires/1w.png" alt="">
+	<img src="img/wires/1bk.png" alt="">
+	<img src="img/wires/2r.png" alt="">
+	<img src="img/wires/2o.png" alt="">
+	<img src="img/wires/2y.png" alt="">
+	<img src="img/wires/2g.png" alt="">
+	<img src="img/wires/2b.png" alt="">
+	<img src="img/wires/2w.png" alt="">
+	<img src="img/wires/2bk.png" alt="">
+	<img src="img/wires/3r.png" alt="">
+	<img src="img/wires/3o.png" alt="">
+	<img src="img/wires/3y.png" alt="">
+	<img src="img/wires/3g.png" alt="">
+	<img src="img/wires/3b.png" alt="">
+	<img src="img/wires/3w.png" alt="">
+	<img src="img/wires/3bk.png" alt="">
+	<img src="img/wires/4r.png" alt="">
+	<img src="img/wires/4o.png" alt="">
+	<img src="img/wires/4y.png" alt="">
+	<img src="img/wires/4g.png" alt="">
+	<img src="img/wires/4b.png" alt="">
+	<img src="img/wires/4w.png" alt="">
+	<img src="img/wires/4bk.png" alt="">
+  <img src="img/wires/1rc.png" alt="">
+	<img src="img/wires/1oc.png" alt="">
+	<img src="img/wires/1yc.png" alt="">
+	<img src="img/wires/1gc.png" alt="">
+	<img src="img/wires/1bc.png" alt="">
+	<img src="img/wires/1wc.png" alt="">
+	<img src="img/wires/1bkc.png" alt="">
+	<img src="img/wires/2rc.png" alt="">
+	<img src="img/wires/2oc.png" alt="">
+	<img src="img/wires/2yc.png" alt="">
+	<img src="img/wires/2gc.png" alt="">
+	<img src="img/wires/2bc.png" alt="">
+	<img src="img/wires/2wc.png" alt="">
+	<img src="img/wires/2bkc.png" alt="">
+	<img src="img/wires/3rc.png" alt="">
+	<img src="img/wires/3oc.png" alt="">
+	<img src="img/wires/3yc.png" alt="">
+	<img src="img/wires/3gc.png" alt="">
+	<img src="img/wires/3bc.png" alt="">
+	<img src="img/wires/3wc.png" alt="">
+	<img src="img/wires/3bkc.png" alt="">
+	<img src="img/wires/4rc.png" alt="">
+	<img src="img/wires/4oc.png" alt="">
+	<img src="img/wires/4yc.png" alt="">
+	<img src="img/wires/4gc.png" alt="">
+	<img src="img/wires/4bc.png" alt="">
+	<img src="img/wires/4wc.png" alt="">
+	<img src="img/wires/4bkc.png" alt="">
+  <img src="img/rc.png" alt="">
+  <img src="img/entr.png" alt="">
+  <audio id="snip">
+    <source src="audio/wireCut.wav" type="audio/wav"/>
+    Your browser does not support the audio element.
+  </audio>
+  <audio id="explosion">
+    <source src="audio/explosion.wav" type="audio/wav"/>
+    Your browser does not support the audio element.
+  </audio>
+  <audio id="beep">
+    <source src="audio/beep.wav" type="audio/wav"/>
+    Your browser does not support the audio element.
+  </audio>
+  <audio id="buzzer">
+    <source src="audio/buzzer.wav" type="audio/wav"/>
+    Your browser does not support the audio element.
+  </audio>
+</div>
+
+</body>
+</html>

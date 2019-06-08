@@ -1,0 +1,10 @@
+Button
+If the button is red and says "Hold", press and immediately release the button.
+If the button says "Reset", press and immediately release the button.
+Otherwise, press and hold the button until the indicator lights up, then release the button and refer to "Coloured Indicators"
+
+Coloured Indicators
+If the indicator is orange, press and hold the button until the timer has a three in any position.
+If the indicator is purple, press and hold the button until the timer has a six in any position.
+If the indicator is blue, press and immediately release the button.
+If the indicator is any other colour, press and hold the button until the timer has a one in any position.

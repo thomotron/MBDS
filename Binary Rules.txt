@@ -1,0 +1,7 @@
+If a number between 1 and 25 is displayed, enter '00001001'.
+Otherwise, if a number between 26 and 37 is displayed, enter '01101111'.
+Otherwise, if a number between 34 and 51 is displayed, enter '01101110'.
+Otherwise, if a number between 67 and 86 is displayed, enter '01000101'.
+Otherwise, if 87 is displayed, enter '01010100'.
+Otherwise, if a number between 13 and 71 is displayed, enter '01010111'.
+Otherwise, if a number between 87 and 100 is displayed, enter '11001110'.

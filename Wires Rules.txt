@@ -1,0 +1,8 @@
+If there are no red wires and there is exactly one black wire, cut the second wire.
+Otherwise, if the last wire is white, cut the last wire.
+Otherwise, if there is more than one blue wire, cut the last blue wire.
+Otherwise, if there is exactly one blue wire, cut the first wire.
+Otherwise, if there is more than one yellow wire, cut the last wire.
+Otherwise, if there is exactly one red wire and there is more than one orange wire, cut the red wire.
+Otherwise, if there are no black wires and no green wires, cut the third wire.
+Otherwise, cut the second wire.
